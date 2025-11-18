@@ -1,0 +1,7 @@
+{
+  "name": "GeoMCC Engine Simulator",
+  "description": "A web application to simulate and visualize the GeoMCC Engine's ability to predict merchant category codes based on location and recommend the best payment card to maximize user rewards.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
