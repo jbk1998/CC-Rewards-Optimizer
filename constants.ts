@@ -13,7 +13,7 @@ export const USER_CARDS: Card[] = [
         { mccGroup: MCCGroup.Grocery, multiplier: 4 },
       ],
     },
-    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/Images/amex-gold.png',
+    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/icons/amex-gold.png',
     isActive: true,
   },
   {
@@ -31,7 +31,7 @@ export const USER_CARDS: Card[] = [
         { merchantName: 'Lyft', multiplier: 5 }
       ]
     },
-    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/Images/chase-sapphire-reserve.png',
+    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/icons/chase-sapphire-reserve.png',
     isActive: true,
   },
   {
@@ -46,7 +46,7 @@ export const USER_CARDS: Card[] = [
         { merchantName: 'Lululemon', multiplier: 1, description: 'Offers a valuable statement credit, making it the top choice.' }
       ]
     },
-    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/Images/amex-platinum.png',
+    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/icons/amex-platinum.png',
     isActive: true,
   },
   {
@@ -61,7 +61,7 @@ export const USER_CARDS: Card[] = [
             { mccGroup: MCCGroup.Travel, multiplier: 2 },
         ],
     },
-    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/Images/bilt-mastercard.png',
+    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/icons/bilt-mastercard.png',
     isActive: true,
   },
   {
@@ -73,7 +73,7 @@ export const USER_CARDS: Card[] = [
       baseRate: 2,
       rules: [],
     },
-    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/Images/capital-one-venture-x.png',
+    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/icons/capital-one-venture-x.png',
     isActive: true,
   },
   {
@@ -89,7 +89,7 @@ export const USER_CARDS: Card[] = [
         { mccGroup: MCCGroup.Grocery, multiplier: 5 },
       ],
     },
-    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/Images/citi-custom-cash.png',
+    imageUrl: 'https://raw.githubusercontent.com/jbk1998/CC-Rewards-Optimizer/main/icons/citi-custom-cash.png',
     isActive: true,
   },
 ];
