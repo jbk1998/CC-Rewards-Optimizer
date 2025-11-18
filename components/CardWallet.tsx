@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from '../types';
+import CardImage from './CardImage';
 
 interface CardWalletProps {
   cards: Card[];
@@ -20,9 +21,11 @@ const CardWallet: React.FC<CardWalletProps> = ({ cards, onToggleCard }) => {
             }`}
           >
             <div className="flex items-center overflow-hidden">
-              <div className="w-12 h-8 mr-3 flex-shrink-0">
-                {card.imageUrl && <img src={card.imageUrl} alt={card.productName} className="w-full h-full object-contain rounded-sm" />}
-              </div>
+              <CardImage
+                card={card}
+                className="w-12 h-8 mr-3 flex-shrink-0"
+                imageClassName="w-full h-full object-contain rounded-sm"
+              />
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-white text-sm truncate">{card.productName}</p>
                 <p className="text-xs text-gray-400 truncate">{card.issuer}</p>

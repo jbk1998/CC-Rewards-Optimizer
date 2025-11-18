@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '../types';
-import { VisaIcon, AmexIcon, MastercardIcon } from './icons/CardIcons';
+import CardImage from './CardImage';
 
 interface CardRecommendationProps {
   card: Card;
@@ -16,14 +16,9 @@ const getRankColor = (rank: number) => {
 };
 
 const CardRecommendation: React.FC<CardRecommendationProps> = ({ card, rank, rewardValue }) => {
-  const CardNetworkIcon = () => {
-    switch (card.network) {
-      case 'Visa': return <VisaIcon />;
-      case 'Amex': return <AmexIcon />;
-      case 'Mastercard': return <MastercardIcon />;
-      default: return null;
-    }
-  };
+  const rewardDollars = (rewardValue / 100).toFixed(2);
+  const baseDollars = card.rewardProfile.baseRate.toFixed(2);
+  const multiplier = (rewardValue / 100).toFixed(1);
 
   return (
     <div className={`flex items-center p-3 rounded-lg border-l-4 transition-all duration-300 hover:bg-gray-700/50 ${getRankColor(rank)}`}>
@@ -36,16 +31,15 @@ const CardRecommendation: React.FC<CardRecommendationProps> = ({ card, rank, rew
       </div>
       <div className="flex items-center">
          <div className="text-right mr-4">
-            <p className="font-bold text-lg text-green-300">{rewardValue.toFixed(2)}¢</p>
-            <p className="text-xs text-gray-500">per $100</p>
+            <p className="font-bold text-lg text-green-300">${rewardDollars}</p>
+            <p className="text-xs text-gray-400">{multiplier}x for this purchase</p>
+            <p className="text-xs text-gray-500">Base: ${baseDollars}</p>
          </div>
-         <div className="w-16 h-10 flex-shrink-0 flex items-center justify-center bg-gray-900 rounded-md overflow-hidden shadow-md">
-            {card.imageUrl ? (
-              <img src={card.imageUrl} alt={`${card.productName} card`} className="w-full h-full object-cover" />
-            ) : (
-              <CardNetworkIcon />
-            )}
-         </div>
+         <CardImage
+            card={card}
+            className="w-16 h-10 flex-shrink-0 rounded-md overflow-hidden shadow-md"
+            imageClassName="w-full h-full object-cover"
+         />
       </div>
     </div>
   );

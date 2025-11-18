@@ -52,11 +52,15 @@ const responseSchema = {
 
 
 const generatePrompt = (request: PredictionRequest, cards: Card[]): string => {
-  const cardDetails = cards.map(card => 
-    `- Card ID: ${card.id} (${card.productName})\n` +
-    `  - Base Rate: ${card.rewardProfile.baseRate}x points.\n` +
-    `  - Bonus Categories: ${card.rewardProfile.rules.length > 0 ? card.rewardProfile.rules.map(r => `${r.mccGroup} at ${r.multiplier}x`).join(', ') : 'None'}`
-  ).join('\n');
+  const cardDetails = cards.map(card => {
+    let cardInfo = `- Card ID: ${card.id} (${card.productName})\n` +
+                   `  - Base Rate: ${card.rewardProfile.baseRate}x points.\n` +
+                   `  - Bonus Categories: ${card.rewardProfile.rules.length > 0 ? card.rewardProfile.rules.map(r => `${r.mccGroup} at ${r.multiplier}x`).join(', ') : 'None'}`;
+    if (card.rewardProfile.merchantRules) {
+      cardInfo += `\n  - Merchant-Specific Bonuses: ${card.rewardProfile.merchantRules.map(mr => `${mr.merchantName} at ${mr.multiplier}x ${mr.description ? `(${mr.description})` : ''}`).join(', ')}`;
+    }
+    return cardInfo;
+  }).join('\n');
 
   const locationDetails = request.latitude && request.longitude
     ? `- Latitude: ${request.latitude}\n    - Longitude: ${request.longitude}`
@@ -82,6 +86,7 @@ const generatePrompt = (request: PredictionRequest, cards: Card[]): string => {
         c. A 'confidence' score for this specific prediction.
         d. A 'recommended_card_ranking', calculating the expected reward value for each card and ranking them.
         e. A short, clear array of 'explanations' for your reasoning.
+    4.  IMPORTANT: Check if the identified 'merchant_name' matches any 'Merchant-Specific Bonuses'. If it does, use that multiplier. If a card offers a statement credit (mentioned in a description), rank it as the top choice for that merchant and mention the credit in your explanation.
 
     Return the result as a JSON array, with each element being a complete prediction object matching the provided schema.
   `;

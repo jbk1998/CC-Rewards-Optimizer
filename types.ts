@@ -12,6 +12,12 @@ export interface RewardRule {
   multiplier: number;
 }
 
+export interface MerchantRule {
+  merchantName: string;
+  multiplier: number;
+  description?: string;
+}
+
 export interface Card {
   id: string;
   issuer: string;
@@ -20,6 +26,7 @@ export interface Card {
   rewardProfile: {
     baseRate: number;
     rules: RewardRule[];
+    merchantRules?: MerchantRule[];
   };
   imageUrl?: string;
   isActive: boolean;

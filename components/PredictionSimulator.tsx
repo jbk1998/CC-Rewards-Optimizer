@@ -44,11 +44,29 @@ const PredictionSimulator: React.FC = () => {
     setIsFetchingLocation(true);
     resetState();
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-        setAddress(`Using current location: ${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)}`);
-        setIsFetchingLocation(false);
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        setLatitude(lat);
+        setLongitude(lon);
+        setAddress('Fetching address...');
+
+        try {
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+          if (!response.ok) throw new Error('Failed to fetch address');
+          const data = await response.json();
+          if (data && data.display_name) {
+            setAddress(data.display_name);
+          } else {
+            throw new Error('No address found for location');
+          }
+        } catch (geoError) {
+          console.error("Reverse geocoding error:", geoError);
+          // Fallback to coordinates if address lookup fails
+          setAddress(`Using location: ${lat.toFixed(4)}, ${lon.toFixed(4)}`);
+        } finally {
+            setIsFetchingLocation(false);
+        }
       },
       (err) => {
         setError(`Could not get location: ${err.message}. Please ensure location permissions are granted.`);
